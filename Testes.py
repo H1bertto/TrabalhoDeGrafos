@@ -50,6 +50,15 @@ if __name__ == "__main__":
         6: [1, 2, 5],
     }
 
+    grafo_direcionado_1 = {
+        1: [5, 6],
+        2: [4, 3, 6],
+        3: [1, 4],
+        4: [],
+        5: [6],
+        6: [3, 4],
+    }
+
     print('\nQuestão 1')
     # Deve Retornar True
     print(Grafo().is_adjacente(1, 2, grafo_1))
@@ -127,3 +136,19 @@ if __name__ == "__main__":
     print(Grafo().has_ciclo(grafo_2))
     # Deve Retornar False
     print(Grafo().has_ciclo(grafo_5))
+
+    print('\nQuestão 14')
+    # Deve Retornar 3
+    print(Grafo(direcionado=True).get_grau_de_entrada(4, grafo_direcionado_1))
+    # Deve Retornar 0
+    print(Grafo(direcionado=True).get_grau_de_entrada(2, grafo_direcionado_1))
+
+    print('\nQuestão 15')
+    # # Deve Retornar 3
+    # print(Grafo(direcionado=True).get_grau_de_entrada(4, grafo_direcionado_1))
+    # # Deve Retornar 0
+    # print(Grafo(direcionado=True).get_grau_de_entrada(2, grafo_direcionado_1))
+
+    print('\nQuestão 16')
+    # Deve Retornar O grafo transposto
+    print(Grafo(direcionado=True).get_transposto(grafo_direcionado_1))

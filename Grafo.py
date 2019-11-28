@@ -1,6 +1,6 @@
 class Grafo:
-    def __init__(self, grafo=None):
-        if grafo is not None:
+    def __init__(self, grafo=None, direcionado=False):
+        if grafo is not None and not direcionado:
             nulo = self.is_nulo(grafo)
             if not nulo[0]:
                 print(self.is_adjacente(1, 2, grafo))
@@ -16,6 +16,12 @@ class Grafo:
                 print(self.is_euleriano(grafo))
                 print(self.is_unicursal(grafo))
                 print(self.has_ciclo(grafo))
+
+        if grafo is not None and direcionado:
+            self.get_grau_de_entrada(4, grafo)
+            self.ordenacao_topologica()
+            self.get_transposto(grafo)
+            self.is_fortemente_conexo()
 
     # Para Grafos Não Direcionados ----------------------------------------------
     # Questão 1
@@ -156,20 +162,38 @@ class Grafo:
 
     # Para Grafos Direcionados ----------------------------------------------
     # Questão 14
-    def get_grau_de_entrada(self):
-        pass
+    def get_grau_de_entrada(self, vertice, grafo):
+        count_entrada = 0
+        for v1 in grafo.keys():
+            if vertice in grafo[v1]:
+                count_entrada += 1
+        return f'O Grau de Entrada do Vértice {vertice} é: {count_entrada}'
 
     # Questão 15
     def ordenacao_topologica(self):
         pass
 
     # Questão 16
-    def get_transposto(self):
-        pass
+    def get_transposto(self, grafo):
+        grafo_transposto = {
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+    }
+        for vertice1 in grafo.keys():
+            for vertice2 in grafo.keys():
+                if vertice2 in grafo[vertice1] and vertice1 != vertice2:
+                    grafo_transposto[vertice2].append(vertice1)
+        return f'Grafo: {grafo} O Grafo Transposto: {grafo_transposto}'
 
     # Questão 17
-    def is_fortemente_conexo(self):
-        pass
+    def is_fortemente_conexo(self, grafo):
+        for vertice1 in grafo.keys():
+            for vertice2 in grafo.keys():
+                if vertice1
 
 
 if __name__ == "__main__":
@@ -220,6 +244,14 @@ if __name__ == "__main__":
         6: [1, 2, 5],
     }
 
+    grafo_direcionado_1 = {
+        1: [5, 6],
+        2: [4, 3, 6],
+        3: [1, 4],
+        4: [],
+        5: [6],
+        6: [3, 4],
+    }
     # -------------------------------------------------
 
     # Inicio dos Resultados
@@ -233,3 +265,5 @@ if __name__ == "__main__":
     Grafo(grafo_4)
     print('\nGrafo 5')
     Grafo(grafo_5)
+    print('\nGrafo Direcionado 1')
+    Grafo(grafo_direcionado_1, direcionado=True)
