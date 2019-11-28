@@ -28,36 +28,36 @@ class Grafo:
 
     # Questão 2
     def get_grau(self, vertice):
-        return 'Grau:', len(vertice)
+        return f'Grau do Vértice {vertice} é:', len(vertice)
 
     # Questão 3
     def is_regular(self, grafo):
         grau = len(list(grafo.values())[0])
         for vertice in grafo.keys():
             if len(grafo[vertice]) != grau:
-                return False, 'Não é Regular'
-        return True, 'É Regular'
+                return False, 'O Grafo não é Regular'
+        return True, 'O Grafo é Regular'
 
     # Questão 4
     def is_isolado(self, vertice):
         if len(vertice) == 0:
-            return True, 'É Isolado'
+            return True, f'O Vértice {vertice} é Isolado'
         else:
-            return False, 'Não é Isolado'
+            return False, f'O Vértice {vertice} não é Isolado'
 
     # Questão 5
     def is_pendente(self, vertice):
         if len(vertice) == 1:
-            return True, 'É Pendente'
+            return True, f'O Vértice {vertice} é Pendente'
         else:
-            return False, 'Não é Pendente'
+            return False, f'O Vértice {vertice} não é Pendente'
 
     # Questão 6
     def is_nulo(self, grafo):
         for vertice in grafo.keys():
             if len(grafo[vertice]) != 0:
-                return False, 'Não é Nulo'
-        return True, 'É Nulo'
+                return False, 'O Grafo não é Nulo'
+        return True, 'O Grafo é Nulo'
 
     # Questão 7
     def is_completo(self, grafo):
@@ -65,16 +65,16 @@ class Grafo:
             for vertice1 in grafo.keys():
                 for vertice2 in grafo.keys():
                     if vertice2 not in grafo[vertice1] and vertice1 != vertice2:
-                        return False, 'Não é Completo'
-            return True, 'É Completo'
-        return False, 'Não é Completo'
+                        return False, 'O Grafo não é Completo'
+            return True, 'O Grafo é Completo'
+        return False, 'O Grafo não é Completo'
 
     # Questão 8
     def is_conexo(self, grafo):
         for vertice in grafo.keys():
             if self.is_isolado(grafo[vertice])[0]:
-                return False, 'Não é Conexo'
-        return True, 'É Conexo'
+                return False, 'O Grafo não é Conexo'
+        return True, 'O Grafo é Conexo'
 
     # Questão 9
     def is_bipartido(self, grafo):
@@ -90,9 +90,9 @@ class Grafo:
                         contem = True
                         break
                 if not contem:
-                    return False, 'Não é Bipartido'
+                    return False, 'O Grafo não é Bipartido'
             else:
-                return False, 'Não é Bipartido'
+                return False, 'O Grafo não é Bipartido'
 
         for vertice2 in g2.keys():
             if vertice2 not in g2[vertice2]:
@@ -102,10 +102,10 @@ class Grafo:
                         contem = True
                         break
                 if not contem:
-                    return False, 'Não é Bipartido'
+                    return False, 'O Grafo não é Bipartido'
             else:
-                return False, 'Não é Bipartido'
-        return True, 'É Bipartido'
+                return False, 'O Grafo não é Bipartido'
+        return True, 'O Grafo é Bipartido'
 
     # Questão 10
     def get_complementar(self, grafo):
@@ -123,16 +123,16 @@ class Grafo:
                     if vertice2 not in grafo[vertice1] and vertice1 != vertice2:
                         complementar[vertice1].append(vertice2)
 
-        return 'Grafo', grafo, 'Grafo Complementar', complementar
+        return 'Grafo:', grafo, 'seu Grafo Complementar é:', complementar
 
     # Questão 11
     def is_euleriano(self, grafo):
         if self.is_conexo(grafo)[0]:
             for vertice in grafo.keys():
                 if self.get_grau(grafo[vertice])[1] % 2 != 0:
-                    return False, 'Não é Euleriano'
-            return True, 'É Euleriano'
-        return False, 'Não é Euleriano'
+                    return False, 'O Grafo não é Euleriano'
+            return True, 'O Grafo é Euleriano'
+        return False, 'O Grafo  não é Euleriano'
 
     # Questão 12
     def is_unicursal(self, grafo):
@@ -142,17 +142,17 @@ class Grafo:
                 count_vertice_impar += 1
 
         if count_vertice_impar == 2:
-            return True, 'É Unicursal'
+            return True, 'O Grafo é Unicursal'
         else:
-            return False, 'Não é Unicursal'
+            return False, 'O Grafo não é Unicursal'
 
     # Questão 13
     def has_ciclo(self, grafo):
         if not self.is_nulo(grafo)[0]:
             for vertice in grafo.keys():
                 if vertice in grafo[vertice]:
-                    return True, 'Tem Ciclo'
-        return False, 'Não tem Ciclo'
+                    return True, 'O Grafo tem Ciclo'
+        return False, 'O Grafo não tem Ciclo'
 
     # Para Grafos Direcionados ----------------------------------------------
     # Questão 14
@@ -221,6 +221,7 @@ if __name__ == "__main__":
     }
 
     # -------------------------------------------------
+
     # Inicio dos Resultados
     print('Grafo 1')
     Grafo(grafo_1)
