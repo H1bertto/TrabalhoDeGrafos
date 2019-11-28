@@ -2,10 +2,10 @@
 
 ## Pré-requisito
 Windows:
-[Python](https://www.python.org/ftp/python/3.7.5/python-3.7.5-amd64.exe)
+[Python3](https://www.python.org/ftp/python/3.7.5/python-3.7.5-amd64.exe)
 
 MAC:
-[Python](https://www.python.org/ftp/python/3.7.5/python-3.7.5-macosx10.9.pkg)
+[Python3](https://www.python.org/ftp/python/3.7.5/python-3.7.5-macosx10.9.pkg)
 
 ## Lista de Comandos para rodar no cmd/bash
 

@@ -191,9 +191,9 @@ class Grafo:
 
     # Questão 17
     def is_fortemente_conexo(self, grafo):
-        for vertice1 in grafo.keys():
-            for vertice2 in grafo.keys():
-                if vertice1
+        # for vertice1 in grafo.keys():
+        #     for vertice2 in grafo.keys():
+        pass
 
 
 if __name__ == "__main__":
