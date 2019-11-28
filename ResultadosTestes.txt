@@ -1,0 +1,66 @@
+Testes
+
+Questão 1
+(True, 'Vertice 1 É Adjacente de Vertice 2')
+(False, 'Vertice 1 Não é Adjacente de Vertice 2')
+
+Questão 2
+('Grau do Vértice [1, 2, 4, 5, 6] é:', 5)
+('Grau do Vértice [2] é:', 1)
+
+Questão 3
+(True, 'O Grafo é Regular')
+(False, 'O Grafo não é Regular')
+
+Questão 4
+(False, 'O Vértice [1, 2, 3, 5, 6] não é Isolado')
+(True, 'O Vértice [] é Isolado')
+
+Questão 5
+(False, 'O Vértice [1, 2, 4, 5, 6] não é Pendente')
+(True, 'O Vértice [2] é Pendente')
+
+Questão 6
+(False, 'O Grafo não é Nulo')
+(True, 'O Grafo é Nulo')
+
+Questão 7
+(True, 'O Grafo é Completo')
+(False, 'O Grafo não é Completo')
+
+Questão 8
+(True, 'O Grafo é Conexo')
+(False, 'O Grafo não é Conexo')
+
+Questão 9
+(False, 'O Grafo não é Bipartido')
+(True, 'O Grafo é Bipartido')
+
+Questão 10
+('Grafo:', {1: [2, 3, 4, 5, 6], 2: [1, 3, 4, 5, 6], 3: [1, 2, 4, 5, 6], 4: [1, 2, 3, 5, 6], 5: [1, 2, 3, 4, 6], 6: [1, 2, 3, 4, 5]}, 'seu Grafo Complementar é:', {1: [], 2: [], 3: [], 4: [], 5: [], 6: []})
+('Grafo:', {1: [5, 6], 2: [4, 3, 6], 3: [2, 4], 4: [3, 2], 5: [1, 6], 6: [1, 2, 5]}, 'seu Grafo Complementar é:', {1: [2, 3, 4], 2: [1, 5], 3: [1, 5, 6], 4: [1, 5, 6], 5: [2, 3, 4], 6: [3, 4]})
+
+Questão 11
+(False, 'O Grafo não é Euleriano')
+(True, 'O Grafo é Euleriano')
+
+Questão 13
+(False, 'O Grafo não é Unicursal')
+(True, 'O Grafo é Unicursal')
+
+Questão 13
+(True, 'O Grafo tem Ciclo')
+(False, 'O Grafo não tem Ciclo')
+
+Questão 14
+O Grau de Entrada do Vértice 4 é: 3
+O Grau de Entrada do Vértice 2 é: 0
+
+Questão 15
+None
+
+Questão 16
+Grafo: {1: [5, 6], 2: [4, 3, 6], 3: [1, 4], 4: [], 5: [6], 6: [3, 4]} O Grafo Transposto: {1: [3], 2: [], 3: [2, 6], 4: [2, 3, 6], 5: [1], 6: [1, 2, 5]}
+
+Questão 17
+None
