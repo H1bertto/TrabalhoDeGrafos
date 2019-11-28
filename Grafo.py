@@ -1,87 +1,160 @@
-from string import digits as nums
-from random import randint
-
-
 class Grafo:
-    def __init__(self, quant_vertices=8):
-        self.vertices = list(nums)[:quant_vertices]
-        print(self.vertices)
-        self.generate_grafo(self.vertices)
+    def __init__(self, grafo=None):
+        if grafo is not None:
+            nulo = self.is_nulo(grafo)
+            if not nulo[0]:
+                print(self.is_adjacente(1, 2, grafo))
+                print(self.get_grau(grafo[3]))
+                print(self.is_regular(grafo))
+                print(self.is_isolado(grafo[4]))
+                print(self.is_pendente(grafo[3]))
+                print(nulo)
+                print(self.is_completo(grafo))
+                print(self.is_conexo(grafo))
+                print(self.is_bipartido(grafo))
+                print(self.get_complementar(grafo))
+                print(self.is_euleriano(grafo))
+                print(self.is_unicursal(grafo))
+                print(self.has_ciclo(grafo))
 
-    def generate_grafo(self, vertices):
-        graph = {}
-        pode_ciclo = randint(0, 1)
-        print(pode_ciclo)
-        for v in vertices:
-            grau = randint(0, int(max(vertices)))
-            if not v in graph:
-                graph[v] = []
-            for add in range(grau):
-                num = randint(0, int(max(vertices)))
-                if num not in graph[v] and (num != int(v) or pode_ciclo):
-                    graph[v].append(num)
-                    if not str(num) in graph:
-                        graph[str(num)] = []
-                    if num not in graph[v]:
-                        graph[str(num)].append(int(v))
-            for vtc in graph:
-                if v != vtc and int(vtc) in graph[v] and int(v) not in graph[vtc]:
-                    graph[vtc].append(int(v))
-        graph = dict(sorted(graph.items(), key=lambda kv: kv[0]))
-        print(graph)
-
+    # Para Grafos Não Direcionados ----------------------------------------------
     # Questão 1
-    def is_adjacente(self):
-        pass
+    def is_adjacente(self, vertice1, vertice2, grafo):
+        # Se o vértice 2 estiver na lista de de adjacência do vértice 1, eles serão adjacentes
+        if vertice2 in grafo[vertice1]:
+            return True, f'Vertice {vertice1} É Adjacente de Vertice {vertice2}'
+        else:
+            return False, f'Vertice {vertice1} Não é Adjacente de Vertice {vertice2}'
 
     # Questão 2
-    def get_grau(self, vertice1, vertice2):
-        pass
+    def get_grau(self, vertice):
+        return 'Grau:', len(vertice)
 
     # Questão 3
-    def is_regular(self):
-        pass
+    def is_regular(self, grafo):
+        grau = len(list(grafo.values())[0])
+        for vertice in grafo.keys():
+            if len(grafo[vertice]) != grau:
+                return False, 'Não é Regular'
+        return True, 'É Regular'
 
     # Questão 4
-    def is_isolado(self):
-        pass
+    def is_isolado(self, vertice):
+        if len(vertice) == 0:
+            return True, 'É Isolado'
+        else:
+            return False, 'Não é Isolado'
 
     # Questão 5
-    def is_pendente(self):
-        pass
+    def is_pendente(self, vertice):
+        if len(vertice) == 1:
+            return True, 'É Pendente'
+        else:
+            return False, 'Não é Pendente'
 
     # Questão 6
-    def is_nulo(self):
-        pass
+    def is_nulo(self, grafo):
+        for vertice in grafo.keys():
+            if len(grafo[vertice]) != 0:
+                return False, 'Não é Nulo'
+        return True, 'É Nulo'
 
     # Questão 7
-    def is_completo(self):
-        pass
+    def is_completo(self, grafo):
+        if not self.is_nulo(grafo)[0]:
+            for vertice1 in grafo.keys():
+                for vertice2 in grafo.keys():
+                    if vertice2 not in grafo[vertice1] and vertice1 != vertice2:
+                        return False, 'Não é Completo'
+            return True, 'É Completo'
+        return False, 'Não é Completo'
 
     # Questão 8
-    def is_conexo(self):
-        pass
+    def is_conexo(self, grafo):
+        for vertice in grafo.keys():
+            if self.is_isolado(grafo[vertice])[0]:
+                return False, 'Não é Conexo'
+        return True, 'É Conexo'
 
     # Questão 9
-    def is_bipartido(self):
-        pass
+    def is_bipartido(self, grafo):
+        g1 = dict(list(grafo.items())[len(grafo)//2:])
+        g2 = dict(list(grafo.items())[:len(grafo)//2])
+        contem = False
+
+        for vertice1 in g1.keys():
+            if vertice1 not in g1[vertice1]:
+                for vertice2 in g2.keys():
+                    v2_group = list(g2.values())[0] + list(g2.values())[1] + list(g2.values())[2]
+                    if vertice1 in g2[vertice2] and vertice2 not in v2_group:
+                        contem = True
+                        break
+                if not contem:
+                    return False, 'Não é Bipartido'
+            else:
+                return False, 'Não é Bipartido'
+
+        for vertice2 in g2.keys():
+            if vertice2 not in g2[vertice2]:
+                for vertice1 in g1.keys():
+                    v1_group = list(g1.values())[0] + list(g1.values())[1] + list(g1.values())[2]
+                    if vertice2 in g1[vertice1] and vertice1 not in v1_group:
+                        contem = True
+                        break
+                if not contem:
+                    return False, 'Não é Bipartido'
+            else:
+                return False, 'Não é Bipartido'
+        return True, 'É Bipartido'
 
     # Questão 10
-    def get_complementar(self):
-        pass
+    def get_complementar(self, grafo):
+        complementar = {
+                1: [],
+                2: [],
+                3: [],
+                4: [],
+                5: [],
+                6: [],
+               }
+        if not self.is_completo(grafo)[0]:
+            for vertice1 in grafo.keys():
+                for vertice2 in grafo.keys():
+                    if vertice2 not in grafo[vertice1] and vertice1 != vertice2:
+                        complementar[vertice1].append(vertice2)
+
+        return 'Grafo', grafo, 'Grafo Complementar', complementar
 
     # Questão 11
-    def is_euleriano(self):
-        pass
+    def is_euleriano(self, grafo):
+        if self.is_conexo(grafo)[0]:
+            for vertice in grafo.keys():
+                if self.get_grau(grafo[vertice])[1] % 2 != 0:
+                    return False, 'Não é Euleriano'
+            return True, 'É Euleriano'
+        return False, 'Não é Euleriano'
 
     # Questão 12
-    def is_unicursal(self):
-        pass
+    def is_unicursal(self, grafo):
+        count_vertice_impar = 0
+        for vertice in grafo.keys():
+            if self.get_grau(grafo[vertice])[1] % 2 != 0:
+                count_vertice_impar += 1
+
+        if count_vertice_impar == 2:
+            return True, 'É Unicursal'
+        else:
+            return False, 'Não é Unicursal'
 
     # Questão 13
-    def has_ciclo(self):
-        pass
+    def has_ciclo(self, grafo):
+        if not self.is_nulo(grafo)[0]:
+            for vertice in grafo.keys():
+                if vertice in grafo[vertice]:
+                    return True, 'Tem Ciclo'
+        return False, 'Não tem Ciclo'
 
+    # Para Grafos Direcionados ----------------------------------------------
     # Questão 14
     def get_grau_de_entrada(self):
         pass
@@ -100,4 +173,62 @@ class Grafo:
 
 
 if __name__ == "__main__":
-    Grafo()
+    # Grafos Representados como uma Lista de Ajacência
+    grafo_1 = {
+        1: [2, 3, 4, 5, 6],
+        2: [1, 3, 4, 5, 6],
+        3: [1, 2, 4, 5, 6],
+        4: [1, 2, 3, 5, 6],
+        5: [1, 2, 3, 4, 6],
+        6: [1, 2, 3, 4, 5],
+    }
+
+    grafo_2 = {
+        1: [1, 5, 6],
+        2: [1, 3, 6],
+        3: [2],
+        4: [],
+        5: [1, 6],
+        6: [1, 2, 5],
+    }
+
+    grafo_3 = {
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+    }
+
+    grafo_4 = {
+        1: [4, 5],
+        2: [5, 6],
+        3: [6, 4],
+
+        4: [1, 2],
+        5: [2, 3],
+        6: [3, 1],
+    }
+
+    grafo_5 = {
+        1: [5, 6],
+        2: [4, 3, 6],
+        3: [2, 4],
+        4: [3, 2],
+        5: [1, 6],
+        6: [1, 2, 5],
+    }
+
+    # -------------------------------------------------
+    # Inicio dos Resultados
+    print('Grafo 1')
+    Grafo(grafo_1)
+    print('\nGrafo 2')
+    Grafo(grafo_2)
+    print('\nGrafo 3')
+    Grafo(grafo_3)
+    print('\nGrafo 4')
+    Grafo(grafo_4)
+    print('\nGrafo 5')
+    Grafo(grafo_5)
